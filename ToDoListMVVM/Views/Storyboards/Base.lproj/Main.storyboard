@@ -28,7 +28,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="To Do List" id="34D-yb-spn">
-                        <barButtonItem key="rightBarButtonItem" title="New To Do" id="9oD-3T-O6F">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9oD-3T-O6F">
                             <connections>
                                 <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="16e-Uu-Eda"/>
                             </connections>
