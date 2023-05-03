@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TodoItem {
+struct TodoItem: Encodable, Decodable {
     var title: String
     var isCompleted: Bool
 }

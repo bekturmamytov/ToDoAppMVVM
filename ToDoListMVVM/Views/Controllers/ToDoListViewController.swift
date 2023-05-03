@@ -9,15 +9,23 @@ import UIKit
 
 class TodoListViewController: UIViewController {
     
+    var viewModel: TodoListViewModel!
+    var todoItems: [TodoItem] = []
+    
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: TodoListViewModel!
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        viewModel = TodoListViewModel()
-
+        
+        // Retrieve the saved todo items from UserDefaults
+        if let data = UserDefaults.standard.data(forKey: "todoItems") {
+            let todoItems = try! JSONDecoder().decode([TodoItem].self, from: data)
+            viewModel = TodoListViewModel(todoItems: todoItems)
+        } else {
+            viewModel = TodoListViewModel(todoItems: todoItems)
+        }
+        
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -31,13 +39,22 @@ class TodoListViewController: UIViewController {
             guard let title = alertController.textFields?.first?.text else { return }
             self.viewModel.addTodoItem(title: title)
             self.tableView.reloadData()
+            self.saveTodoItems() // Save the todo items
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(addAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
-    
+   
+    func saveTodoItems() {
+        // Convert the todo items to a data representation
+        let data = try! JSONEncoder().encode(viewModel.todoItems)
+        
+        // Save the data to UserDefaults
+        UserDefaults.standard.set(data, forKey: "todoItems")
+    }
+
     
 }
 
@@ -65,6 +82,7 @@ extension TodoListViewController: UITableViewDelegate {
         if editingStyle == .delete {
             viewModel.removeTodoItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            saveTodoItems() // Save the todo items
         }
     }
 }

@@ -8,7 +8,11 @@
 import Foundation
 
 class TodoListViewModel {
-    var todoItems: [TodoItem] = []
+    var todoItems: [TodoItem]
+    
+    init(todoItems: [TodoItem]) {
+        self.todoItems = todoItems
+    }
 
     func addTodoItem(title: String) {
         let newItem = TodoItem(title: title, isCompleted: false)
