@@ -11,7 +11,7 @@ This is a simple to-do list application built for iOS devices using the MVVM des
 - Categorize to-do items by selecting a category from the list
 
 ## Installation
-1. Clone the repository to your local machine using the following command: inline code git clone https://github.com/your-username/todo-list-app.git
+1. Clone the repository to your local machine using the following command: 'git clone https://github.com/your-username/todo-list-app.git'
 
 ## Usage
 1. Launch the app on your iOS device.
